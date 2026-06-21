@@ -590,11 +590,13 @@ export const actorCombatant=(actor)=>{
 export const actorIsJoker=(actor)=>{
 
     log('cheking if actor is joker');
+	console.log("FORK actorIsJoker LIVE");
    // actor.token.id==el.tokenId
   /// removed  flags.swade.hasJoker (swade bug)
-    if(game.combat && game.combat.combatants.filter(el=>(el.flags?.swade?.cardValue>14 || el?.initiative>15) && el?.actor?.id===actor.id && 
-        (!actor?.isToken || actor.token.id==el.token.id)  /// check if it's the same token
-        ).length>0){
+// FORK: use system.hasJoker instead of cardValue/initiative heuristic (breaks on tarot/high-value decks)
+	if(game.combat && game.combat.combatants.filter(el=>el.system?.hasJoker===true && el?.actor?.id===actor.id && 
+	    (!actor?.isToken || actor.token.id==el.token.id)
+	    ).length>0){
 
        log('actor is joker');
 
