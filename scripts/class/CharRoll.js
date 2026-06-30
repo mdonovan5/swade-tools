@@ -282,6 +282,7 @@ export default class CharRoll extends BasicRoll{
 
 
         this.addFlag('rolltype','attribute');
+        this.addFlag('traitName',attribute);
 
         return await this.buildRoll(dieType,wildDie,this.mod,rof);
     }
@@ -376,6 +377,7 @@ export default class CharRoll extends BasicRoll{
         this.baseModifiers();
         
         this.addFlag('skill',skillName);
+        this.addFlag('traitName',skillName);
         this.addFlag('rolltype','skill');
 
         if (item===undefined){
@@ -972,7 +974,7 @@ export default class CharRoll extends BasicRoll{
 
       // console.log(this.roll);
 
-       this.roll.toMessage(chatData,{rollMode:game.settings.get("core","rollMode")})
+       this.roll.toMessage(chatData,{rollMode:gb.blindRollMode(this.flagUpdate?.['rolltype'],this.flagUpdate?.['traitName'])})
        /* .then((chat)=>{ => already in chatData
        
         

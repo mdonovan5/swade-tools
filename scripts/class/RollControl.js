@@ -1811,7 +1811,7 @@ export default class RollControl {
 
         
 
-       await roll.toMessage(chatData).then(async chat=>{
+       await roll.toMessage(chatData,{rollMode:gb.blindRollMode(chatflags?.rolltype,chatflags?.traitName)}).then(async chat=>{
         if (chatflags){
             let flags=chatflags;
 

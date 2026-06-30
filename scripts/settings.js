@@ -43,6 +43,15 @@ restricted: true
 		type: String,
 		config: false
     }); 
+
+    game.settings.register(gb.moduleName, 'blindTraits', {
+		name: 'Blind GM traits',
+		hint: 'Comma-separated skill OR attribute names that always roll as Blind GM Roll: card hidden from players and Dice So Nice shows faceless (ghost) dice. Case-insensitive. Attributes use their English name (Agility, Smarts, Spirit, Strength, Vigor).',
+		default: 'Notice, Stealth',
+		scope: "world",
+		type: String,
+		config: true
+    });
     
     /*
 

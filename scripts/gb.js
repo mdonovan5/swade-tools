@@ -643,6 +643,21 @@ export const setting=(settingName)=>{
     return game.settings.get('swade-tools',settingName);
 }
 
+/// Returns BLIND roll mode for skills OR attributes whose name appears in the
+/// 'blindTraits' setting; otherwise the current core (sidebar) roll mode. Set at
+/// message creation so the card is born blind (hidden + Dice So Nice ghost dice).
+export const blindRollMode=(rolltype,traitName)=>{
+    const fallback=game.settings.get('core','rollMode');
+    if (!['skill','attribute'].includes(rolltype) || !traitName){
+        return fallback;
+    }
+    const list=(setting('blindTraits')||'').split(',').map(s=>s.trim().toLowerCase()).filter(Boolean);
+    if (list.includes(String(traitName).trim().toLowerCase())){
+        return CONST.DICE_ROLL_MODES.BLIND;
+    }
+    return fallback;
+}
+
 export const systemSettingExists=(settingName)=>{
     if (game.settings.settings.get("swade."+settingName)!==undefined){
         return true;
